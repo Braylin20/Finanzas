@@ -1,0 +1,12 @@
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\bin\Debug\net10.0\FinanazasAspire.ServiceDefaults.deps.json
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\bin\Debug\net10.0\FinanazasAspire.ServiceDefaults.dll
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\bin\Debug\net10.0\FinanazasAspire.ServiceDefaults.pdb
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\obj\Debug\net10.0\FinanazasAspire.ServiceDefaults.csproj.AssemblyReference.cache
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\obj\Debug\net10.0\FinanazasAspire.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\obj\Debug\net10.0\FinanazasAspire.ServiceDefaults.AssemblyInfoInputs.cache
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\obj\Debug\net10.0\FinanazasAspire.ServiceDefaults.AssemblyInfo.cs
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\obj\Debug\net10.0\FinanazasAspire.ServiceDefaults.csproj.CoreCompileInputs.cache
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\obj\Debug\net10.0\FinanazasAspire.ServiceDefaults.dll
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\obj\Debug\net10.0\refint\FinanazasAspire.ServiceDefaults.dll
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\obj\Debug\net10.0\FinanazasAspire.ServiceDefaults.pdb
+C:\Escritorio\Angular\Proyectos-para-practicar\Aspire\Finanzas\FinanazasAspire.ServiceDefaults\obj\Debug\net10.0\ref\FinanazasAspire.ServiceDefaults.dll
