@@ -1,7 +1,21 @@
-<app-sidebar />
+<app-sidebar #sidebar />
 
 <main class="min-h-screen bg-slate-50 pl-0 md:pl-64">
   <div class="p-4 md:p-6">
+    <!-- Header: hamburger moved here (non-fixed) -->
+    <header class="mb-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button class="md:hidden inline-flex items-center justify-center rounded-md bg-slate-900 p-2 text-white shadow"
+                (click)="sidebar.toggle()" aria-label="Open menu">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+
+        <h1 class="text-xl font-semibold">Finanzas</h1>
+      </div>
+    </header>
+
     <router-outlet />
   </div>
 </main>

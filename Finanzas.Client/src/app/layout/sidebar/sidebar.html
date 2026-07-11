@@ -1,15 +1,4 @@
-<!-- Mobile hamburger button (only visible on very small screens and when drawer is closed) -->
-@if (!isOpen) {
-  <button
-    class="sm:hidden fixed top-4 left-4 z-50 inline-flex items-center justify-center rounded-md bg-slate-900 p-2 text-white shadow-lg"
-    (click)="toggle()"
-    aria-label="Open menu"
-  >
-    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-    </svg>
-  </button>
-}
+<!-- mobile hamburger moved to header to avoid overlapping content -->
 
 <!-- Desktop aside (hidden on small screens) -->
 <aside
