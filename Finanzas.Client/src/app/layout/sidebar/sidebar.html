@@ -1,0 +1,53 @@
+<aside
+  class="fixed left-0 top-0 z-40 h-screen w-64 border-r border-blue-950/40 bg-gradient-to-b from-slate-950 via-blue-950 to-slate-900 px-4 py-5 shadow-xl shadow-blue-950/20"
+>
+  <div class="mb-8">
+    <h1 class="text-xl font-semibold text-white">Finanzas</h1>
+    <p class="mt-1 text-sm text-blue-100/75">Panel de control</p>
+  </div>
+
+  <nav aria-label="Menu principal">
+    <details class="group" >
+      <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-blue-50 hover:bg-white/10 hover:text-white">
+        <span>Gastos</span>
+        <span class="text-blue-200 transition-transform group-open:rotate-90">&rsaquo;</span>
+      </summary>
+
+      <div class="mt-2 space-y-1 pl-3">
+        <a routerLink="/gastos/crear"
+           routerLinkActive="bg-white text-blue-950 shadow-sm"
+           class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white">
+          Crear
+        </a>
+
+        <a routerLink="/gastos"
+           routerLinkActive="bg-white text-blue-950 shadow-sm"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white">
+          Lista
+        </a>
+      </div>
+    </details>
+    <details class="group">
+      <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-blue-50 hover:bg-white/10 hover:text-white">
+        <span>Prestamos</span>
+        <span class="text-blue-200 transition-transform group-open:rotate-90">&rsaquo;</span>
+      </summary>
+
+      <div class="mt-2 space-y-1 pl-3">
+        <a routerLink="/prestamos/crear"
+           routerLinkActive="bg-white text-blue-950 shadow-sm"
+           class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white">
+          Crear
+        </a>
+
+        <a routerLink="/prestamos"
+           routerLinkActive="bg-white text-blue-950 shadow-sm"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white">
+          Lista
+        </a>
+      </div>
+    </details>
+  </nav>
+</aside>

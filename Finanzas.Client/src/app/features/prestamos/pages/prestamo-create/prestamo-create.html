@@ -1,0 +1,74 @@
+<section class="mx-auto max-w-3xl space-y-6">
+  <div>
+    <h2 class="text-2xl font-semibold text-slate-900">Crear préstamo</h2>
+    <p class="mt-1 text-sm text-slate-500">
+      Completa los datos necesarios para registrar un nuevo préstamo.
+    </p>
+  </div>
+
+  <form class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="grid gap-5 sm:grid-cols-2">
+      <div class="sm:col-span-2">
+        <label for="descripcion" class="block text-sm font-medium text-slate-700"
+          >Descripcion</label
+        >
+        <input
+          formControlName="descripcion"
+          id="descripcion"
+          type="text"
+          placeholder="Ej: Préstamo personal"
+          class="mt-2 block w-full rounded-lg border bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
+        />
+        @if (formValidation.isValidField(prestamoForm, 'descripcion')) {
+          <span class="text-red-600 text-sm">{{
+            formValidation.getFieldError(prestamoForm, 'descripcion')
+          }}</span>
+        }
+      </div>
+
+      <div>
+        <label for="monto" class="block text-sm font-medium text-slate-700">Monto</label>
+        <div class="relative mt-2">
+          <span
+            class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-sm text-slate-500"
+            >$</span
+          >
+          <input
+            min="0"
+            formControlName="monto"
+            id="monto"
+            type="number"
+            placeholder="0.00"
+            class="block w-full rounded-lg border bg-white py-2.5 pl-8 pr-3 text-sm text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
+          />
+          @if (formValidation.isValidField(prestamoForm, 'monto')) {
+            <span class="text-red-400 text-sm">{{
+              formValidation.getFieldError(prestamoForm, 'monto')
+            }}</span>
+          }
+        </div>
+      </div>
+
+      <div>
+        <label for="fecha" class="block text-sm font-medium text-slate-700">Fecha</label>
+        <input
+          formControlName="fecha"
+          id="fecha"
+          type="date"
+          class="mt-2 block w-full rounded-lg border bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
+        />
+        @if (formValidation.isValidField(prestamoForm, 'fecha')) {
+          <span class="text-red-700 text-sm">{{
+            formValidation.getFieldError(prestamoForm, 'fecha')
+          }}</span>
+        }
+      </div>
+    </div>
+
+    <div
+      class="mt-6 flex flex-col-reverse gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:justify-end"
+    >
+      <shared-button-save />
+    </div>
+  </form>
+</section>

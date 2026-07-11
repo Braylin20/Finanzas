@@ -1,0 +1,147 @@
+<section class="flex h-[calc(100vh-3rem)] flex-col gap-6">
+  <div class="shrink-0 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h2 class="text-2xl font-semibold text-slate-900">Gastos</h2>
+      <p class="mt-1 text-sm text-slate-500">Consulta y administra tus gastos registrados.</p>
+    </div>
+
+    <a
+      routerLink="/gastos/crear"
+      class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800"
+    >
+      Crear gasto
+    </a>
+  </div>
+
+  <div class="shrink-0 grid grid-cols-2 gap-4 lg:grid-cols-4">
+    <shared-dashboard-card
+      title="Total gastado"
+      subtitulo="Muestra el monto total"
+      [totalMontoGastado]="totalMontoGastado()"
+    />
+    <shared-dashboard-card
+      title="Registro"
+      subtitulo="Muestra la cantidad total"
+      [totalCantidadGastos]="cantidadTotalGastos()"
+    />
+    <shared-dashboard-card
+      title="Gastos del mes"
+      subtitulo="Muestra el monto total del mes"
+      [totalGastosMes]="totalGastosMes()"
+    />
+    <shared-dashboard-card
+      title="Gastos de hoy"
+      subtitulo="Muestra el los gastos de hoy"
+      [totalGastosHoy]="totalGastosHoy()"
+    />
+  </div>
+
+  <div class="min-h-0 flex-1 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+    <div class="h-full overflow-auto">
+      <table class="min-w-full divide-y divide-slate-200">
+        <thead class="sticky top-0 z-10 bg-slate-100">
+          <tr>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-600"
+            >
+              #
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-600"
+            >
+              Descripcion
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-600"
+            >
+              Monto
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-600"
+            >
+              Fecha
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-600"
+            >
+              Tipo de gasto
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-600"
+            >
+              Metodo de pago
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-600"
+            >
+              Acciones
+            </th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-slate-100 bg-white">
+          @for (gasto of gastos(); track gasto.gastoId; let i = $index) {
+            <tr class="hover:bg-slate-50">
+              <td class="whitespace-nowrap px-6 py-4 text-sm font-semibold text-slate-500">
+                {{ i + 1 }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-slate-900">
+                {{ gasto.descripcion }}
+              </td>
+              <td
+                class="whitespace-nowrap px-6 py-4 text-right text-sm font-semibold text-emerald-700"
+              >
+                {{ gasto.monto | currency: 'USD' : 'symbol' : '1.2-2' }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm text-slate-600">
+                {{ gasto.fecha | date: 'dd/MM/yyyy' }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm text-slate-600">
+                {{ gasto.tipoGastosDto.descripcion }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4 text-sm text-slate-600">
+                {{ gasto.metodoPago.descripcion }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4">
+                <div class="flex items-center justify-end gap-2">
+                  <button
+                    type="button"
+                    aria-label="Editar gasto"
+                    title="Editar gasto"
+                    class="cursor-pointer inline-flex h-9 w-9 items-center justify-center rounded-lg border border-blue-200 bg-blue-50 text-blue-700 transition hover:border-blue-300 hover:bg-blue-100 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
+                    [routerLink]="['/gastos/editar', gasto.gastoId]"
+                  >
+                    <shared-edit-icon />
+                  </button>
+
+                  <button
+                    type="button"
+                    aria-label="Eliminar gasto"
+                    title="Eliminar gasto"
+                    class="cursor-pointer inline-flex h-9 w-9 items-center justify-center rounded-lg border border-red-200 bg-red-50 text-red-700 transition hover:border-red-300 hover:bg-red-100 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-500/30"
+                    (click)="deleteGasto(gasto.gastoId ?? 0)"
+                  >
+                    <shared-delete-icon />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="px-6 py-10 text-center text-sm text-slate-500">
+                No hay gastos registrados.
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
