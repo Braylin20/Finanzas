@@ -1,5 +1,19 @@
+<!-- Mobile hamburger button (only visible on very small screens and when drawer is closed) -->
+@if (!isOpen) {
+  <button
+    class="sm:hidden fixed top-4 left-4 z-50 inline-flex items-center justify-center rounded-md bg-slate-900 p-2 text-white shadow-lg"
+    (click)="toggle()"
+    aria-label="Open menu"
+  >
+    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+}
+
+<!-- Desktop aside (hidden on small screens) -->
 <aside
-  class="fixed left-0 top-0 z-40 h-screen w-64 border-r border-blue-950/40 bg-gradient-to-b from-slate-950 via-blue-950 to-slate-900 px-4 py-5 shadow-xl shadow-blue-950/20"
+  class="hidden md:block fixed left-0 top-0 z-40 h-screen w-64 border-r border-blue-950/40 bg-gradient-to-b from-slate-950 via-blue-950 to-slate-900 px-4 py-5 shadow-xl shadow-blue-950/20"
 >
   <div class="mb-8">
     <h1 class="text-xl font-semibold text-white">Finanzas</h1>
@@ -7,47 +21,143 @@
   </div>
 
   <nav aria-label="Menu principal">
-    <details class="group" >
-      <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-blue-50 hover:bg-white/10 hover:text-white">
+    <details class="group">
+      <summary
+        class="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-blue-50 hover:bg-white/10 hover:text-white"
+      >
         <span>Gastos</span>
         <span class="text-blue-200 transition-transform group-open:rotate-90">&rsaquo;</span>
       </summary>
 
       <div class="mt-2 space-y-1 pl-3">
-        <a routerLink="/gastos/crear"
-           routerLinkActive="bg-white text-blue-950 shadow-sm"
-           class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white">
+        <a
+          routerLink="/gastos/crear"
+          routerLinkActive="bg-white text-blue-950 shadow-sm"
+          class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white"
+        >
           Crear
         </a>
 
-        <a routerLink="/gastos"
-           routerLinkActive="bg-white text-blue-950 shadow-sm"
-           [routerLinkActiveOptions]="{ exact: true }"
-           class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white">
+        <a
+          routerLink="/gastos"
+          routerLinkActive="bg-white text-blue-950 shadow-sm"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white"
+        >
           Lista
         </a>
       </div>
     </details>
     <details class="group">
-      <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-blue-50 hover:bg-white/10 hover:text-white">
+      <summary
+        class="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-blue-50 hover:bg-white/10 hover:text-white"
+      >
         <span>Prestamos</span>
         <span class="text-blue-200 transition-transform group-open:rotate-90">&rsaquo;</span>
       </summary>
 
       <div class="mt-2 space-y-1 pl-3">
-        <a routerLink="/prestamos/crear"
-           routerLinkActive="bg-white text-blue-950 shadow-sm"
-           class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white">
+        <a
+          routerLink="/prestamos/crear"
+          routerLinkActive="bg-white text-blue-950 shadow-sm"
+          class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white"
+        >
           Crear
         </a>
 
-        <a routerLink="/prestamos"
-           routerLinkActive="bg-white text-blue-950 shadow-sm"
-           [routerLinkActiveOptions]="{ exact: true }"
-           class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white">
+        <a
+          routerLink="/prestamos"
+          routerLinkActive="bg-white text-blue-950 shadow-sm"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white"
+        >
           Lista
         </a>
       </div>
     </details>
   </nav>
 </aside>
+
+<!-- Mobile drawer -->
+@if (isOpen) {
+  <div class="md:hidden fixed inset-0 z-40 flex">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/50" (click)="close()"></div>
+
+    <!-- Panel -->
+    <aside class="relative z-50 h-full w-64 border-r border-blue-950/40 bg-gradient-to-b from-slate-950 via-blue-950 to-slate-900 px-4 py-5 shadow-xl shadow-blue-950/20">
+      <div class="mb-8 flex items-center justify-between">
+        <div>
+          <h1 class="text-xl font-semibold text-white">Finanzas</h1>
+          <p class="mt-1 text-sm text-blue-100/75">Panel de control</p>
+        </div>
+        <button class="text-white" (click)="close()" aria-label="Close menu">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <nav aria-label="Menu principal">
+        <details class="group">
+          <summary
+            class="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-blue-50 hover:bg-white/10 hover:text-white"
+          >
+            <span>Gastos</span>
+            <span class="text-blue-200 transition-transform group-open:rotate-90">&rsaquo;</span>
+          </summary>
+
+          <div class="mt-2 space-y-1 pl-3">
+            <a
+              routerLink="/gastos/crear"
+              routerLinkActive="bg-white text-blue-950 shadow-sm"
+              class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white"
+              (click)="close()"
+            >
+              Crear
+            </a>
+
+            <a
+              routerLink="/gastos"
+              routerLinkActive="bg-white text-blue-950 shadow-sm"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white"
+              (click)="close()"
+            >
+              Lista
+            </a>
+          </div>
+        </details>
+        <details class="group">
+          <summary
+            class="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-blue-50 hover:bg-white/10 hover:text-white"
+          >
+            <span>Prestamos</span>
+            <span class="text-blue-200 transition-transform group-open:rotate-90">&rsaquo;</span>
+          </summary>
+
+          <div class="mt-2 space-y-1 pl-3">
+            <a
+              routerLink="/prestamos/crear"
+              routerLinkActive="bg-white text-blue-950 shadow-sm"
+              class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white"
+              (click)="close()"
+            >
+              Crear
+            </a>
+
+            <a
+              routerLink="/prestamos"
+              routerLinkActive="bg-white text-blue-950 shadow-sm"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="block rounded-lg px-3 py-2 text-sm font-medium text-blue-100 hover:bg-white/10 hover:text-white"
+              (click)="close()"
+            >
+              Lista
+            </a>
+          </div>
+        </details>
+      </nav>
+    </aside>
+  </div>
+}
