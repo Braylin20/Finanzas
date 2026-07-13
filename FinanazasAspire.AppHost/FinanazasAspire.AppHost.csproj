@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\APIS\Finanzas\Finanzas\Finanzas\Finanzas.csproj" />
+    <ProjectReference Include="..\Finanzas.API\Finanzas\Finanzas.csproj" />
   </ItemGroup>
 
   <ItemGroup>

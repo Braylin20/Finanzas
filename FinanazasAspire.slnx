@@ -1,8 +1,8 @@
 <Solution>
-  <Project Path="../../APIS/Finanzas/Finanzas/Finanzas.Domain/Finanzas.Domain.csproj" />
-  <Project Path="../../APIS/Finanzas/Finanzas/Finanzas/Finanzas.csproj" />
   <Project Path="FinanazasAspire.AppHost/FinanazasAspire.AppHost.csproj" />
   <Project Path="FinanazasAspire.ServiceDefaults/FinanazasAspire.ServiceDefaults.csproj" />
+  <Project Path="Finanzas.API/Finanzas.Domain/Finanzas.Domain.csproj" />
+  <Project Path="Finanzas.API/Finanzas/Finanzas.csproj" />
   <Project Path="Finanzas.Client/finanzas.client.esproj">
     <Build />
     <Deploy />
