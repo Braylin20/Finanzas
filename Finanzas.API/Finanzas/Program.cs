@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.RegisterDbContextFactory(builder.Configuration);
 builder.Services.RegisterRepository();
-builder.AddServiceDefaults();
+//builder.AddServiceDefaults();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
@@ -42,5 +42,5 @@ app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapDefaultEndpoints();
+//app.MapDefaultEndpoints();
 app.Run();
