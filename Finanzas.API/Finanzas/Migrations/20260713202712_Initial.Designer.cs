@@ -5,42 +5,49 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace Finanzas.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20260703195342_AgregaVariosMetodosDePagos")]
-    partial class AgregaVariosMetodosDePagos
+    [Migration("20260713202712_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "10.0.9")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Finanzas.Domain.Models.Gastos", b =>
                 {
                     b.Property<int>("GastoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("GastoId"));
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Fecha")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("MetodoPagoId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<double>("Monto")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<int?>("TipoGastoId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("GastoId");
 
@@ -55,11 +62,13 @@ namespace Finanzas.Migrations
                 {
                     b.Property<int>("MetodoPagoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MetodoPagoId"));
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("MetodoPagoId");
 
@@ -93,15 +102,40 @@ namespace Finanzas.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Finanzas.Domain.Models.Prestamos", b =>
+                {
+                    b.Property<int>("PrestamoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PrestamoId"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<double>("Monto")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("PrestamoId");
+
+                    b.ToTable("Prestamos");
+                });
+
             modelBuilder.Entity("Finanzas.Domain.Models.TipoGastos", b =>
                 {
                     b.Property<int>("TipoGastoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TipoGastoId"));
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("TipoGastoId");
 
@@ -142,6 +176,11 @@ namespace Finanzas.Migrations
                         {
                             TipoGastoId = 7,
                             Descripcion = "Subscripciones"
+                        },
+                        new
+                        {
+                            TipoGastoId = 8,
+                            Descripcion = "Supermercado"
                         });
                 });
 

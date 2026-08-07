@@ -7,12 +7,10 @@ public static class DbContextRegister
 {
     public static IServiceCollection RegisterDbContextFactory(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("ConStr");
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         services.AddDbContext<Contexto>(options =>
-            options.UseSqlite(connectionString)
-        );
-
+            options.UseNpgsql(connectionString));
         return services;
     }
 }

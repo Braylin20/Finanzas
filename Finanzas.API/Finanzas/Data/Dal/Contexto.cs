@@ -30,6 +30,12 @@ namespace Finanzas.Data.Dal
                 new MetodoPagos { MetodoPagoId = 4, Descripcion = "Transferencia bancaria" },
                 new MetodoPagos { MetodoPagoId = 7, Descripcion = "Otro" }
             );
+            modelBuilder.Entity<Gastos>()
+               .Property(x => x.Fecha)
+               .HasColumnType("timestamp without time zone");
+            modelBuilder.Entity<Prestamos>()
+               .Property(x => x.Fecha)
+               .HasColumnType("timestamp without time zone");
 
             base.OnModelCreating(modelBuilder);
         }
