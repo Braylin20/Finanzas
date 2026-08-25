@@ -14,7 +14,6 @@ public static class DbContextRegister
             {
                 npgsqlOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: null);
             }));
-
         return services;
     }
 }
