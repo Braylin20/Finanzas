@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://localhost:7164/api',
+  apiUrl: 'https://finanzas-biv5.onrender.com/api',
 };
