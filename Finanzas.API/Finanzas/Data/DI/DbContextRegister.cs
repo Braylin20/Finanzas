@@ -10,7 +10,10 @@ public static class DbContextRegister
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         services.AddDbContext<Contexto>(options =>
-            options.UseNpgsql(connectionString));
+            options.UseNpgsql(connectionString, npgsqlOptions =>
+            {
+                npgsqlOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: null);
+            }));
         return services;
     }
 }
