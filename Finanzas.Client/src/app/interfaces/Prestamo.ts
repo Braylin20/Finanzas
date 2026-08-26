@@ -1,5 +1,5 @@
 export interface Prestamo {
-  pretamoId: number;
+  pretamoId?: number;
   descripcion: string;
   monto: number;
   fecha: string;
