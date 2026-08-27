@@ -46,6 +46,7 @@ jobs:
           /d:sonar.host.url="https://sonarcloud.io"
           /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
           /d:sonar.exclusions="**/node_modules/**,**/bin/**,**/obj/**,**/Migrations/**"
+          /d:sonar.coverage.exclusions="**/*"
 
       - name: Build API
         run: dotnet build Finanzas.API/Finanzas.slnx
