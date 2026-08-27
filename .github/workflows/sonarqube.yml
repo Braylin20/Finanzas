@@ -1,1 +1,57 @@
+name: SonarCloud Analysis
 
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonar:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java (requerido por SonarScanner)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Instalar dependencias Angular
+        working-directory: ./Finanzas.Client
+        run: npm ci
+
+      - name: Instalar dotnet-sonarscanner
+        run: dotnet tool install --global dotnet-sonarscanner
+
+      - name: Begin SonarCloud
+        run: >
+          dotnet sonarscanner begin
+          /k:"Braylin20_Finanzas"
+          /o:"braylin20"
+          /d:sonar.host.url="https://sonarcloud.io"
+          /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          /d:sonar.exclusions="**/node_modules/**,**/bin/**,**/obj/**,**/Migrations/**"
+
+      - name: Build API
+        working-directory: ./Finanzas.API
+        run: dotnet build Finanzas.slnx
+
+      - name: End SonarCloud
+        run: >
+          dotnet sonarscanner end
+          /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
