@@ -4,11 +4,12 @@ import { FormValidationService } from '../../../../shared/services/form-validati
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { PrestamosService } from '../../services/prestamos.service';
 import { NotificationService } from '../../../../shared/services/notification.service';
-
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { finalize } from 'rxjs';
 @Component({
   selector: 'features-prestamo-create',
   templateUrl: './prestamo-create.html',
-  imports: [ButtonSaveComponent],
+  imports: [ButtonSaveComponent, ReactiveFormsModule],
 })
 export class PrestamoCreate {
   private readonly prestamosService = inject(PrestamosService);
@@ -16,7 +17,9 @@ export class PrestamoCreate {
   private formBuilder = inject(NonNullableFormBuilder);
   public formValidation = FormValidationService;
 
-  prestamoForm = this.formBuilder.group({
+  public isLoading = signal(false);
+
+  prestamoForm: FormGroup = this.formBuilder.group({
     prestamoId: [0],
     descripcion: ['', Validators.required],
     monto: [0, [Validators.required, Validators.min(1)]],
@@ -24,13 +27,21 @@ export class PrestamoCreate {
   });
 
   public addPrestamo() {
-    if (!this.prestamoForm.valid) return;
+    if (!this.prestamoForm.valid) {
+      this.prestamoForm.markAllAsTouched();
+      return;
+    }
+    this.isLoading.set(true);
 
     const prestamo = this.prestamoForm.getRawValue();
-    this.prestamosService.postPrestamo(prestamo).subscribe({
-      next: (response) => {
-        this.notificationService.success('Prestamo agregado correctamente');
-      },
-    });
+
+    this.prestamosService
+      .postPrestamo(prestamo)
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: () => {
+          this.notificationService.success('Prestamo agregado correctamente');
+        },
+      });
   }
 }
