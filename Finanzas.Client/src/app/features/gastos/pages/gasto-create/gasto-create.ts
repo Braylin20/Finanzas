@@ -56,7 +56,6 @@ export class GastoCreate implements OnInit {
       return;
     }
 
-    console.log(gasto);
     this.gastosApiService.postGasto(gasto).subscribe({
       next: () => {
         this.notificationService.success('Gasto guardado');
