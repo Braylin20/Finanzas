@@ -48,8 +48,7 @@ jobs:
           /d:sonar.exclusions="**/node_modules/**,**/bin/**,**/obj/**,**/Migrations/**"
 
       - name: Build API
-        working-directory: ./Finanzas.API
-        run: dotnet build Finanzas.slnx
+        run: dotnet build Finanzas.API/Finanzas.slnx
 
       - name: End SonarCloud
         run: >
