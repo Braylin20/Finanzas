@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TipoGastos } from '../../../../interfaces/TipoGastos';
 import { MetodoPago } from '../../../../interfaces/MetodoPago';
+import { finalize } from 'rxjs';
 @Component({
   selector: 'feature-gasto-create',
   imports: [ButtonSaveComponent, ReactiveFormsModule],
@@ -16,13 +17,17 @@ import { MetodoPago } from '../../../../interfaces/MetodoPago';
 })
 export class GastoCreate implements OnInit {
   private readonly gastosApiService = inject(GastosApiService);
-  private formBuilder = inject(NonNullableFormBuilder);
   private readonly notificationService = inject(NotificationService);
+
+  private formBuilder = inject(NonNullableFormBuilder);
   public formValidation = FormValidationService;
+
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+
   public tipoGastos = signal<TipoGastos[]>([]);
   public metodoPagos = signal<MetodoPago[]>([]);
+  public isLoading = signal(false);
 
   public gastoId = Number(this.route.snapshot.paramMap.get('gastoId'));
 
@@ -48,7 +53,7 @@ export class GastoCreate implements OnInit {
       this.gastoForm.markAllAsTouched();
       return;
     }
-
+    this.isLoading.set(true);
     const gasto = this.gastoForm.getRawValue();
 
     if (this.gastoId) {
@@ -56,17 +61,20 @@ export class GastoCreate implements OnInit {
       return;
     }
 
-    this.gastosApiService.postGasto(gasto).subscribe({
-      next: () => {
-        this.notificationService.success('Gasto guardado');
-      },
-      complete: () => {
-        this.gastoForm.reset();
-      },
-      error: (error: HttpErrorResponse) => {
-        this.notificationService.error(error.message);
-      },
-    });
+    this.gastosApiService
+      .postGasto(gasto)
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: () => {
+          this.notificationService.success('Gasto guardado');
+        },
+        complete: () => {
+          this.gastoForm.reset();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.notificationService.error(error.message);
+        },
+      });
   }
 
   public getGastoById() {
